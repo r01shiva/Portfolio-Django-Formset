@@ -1,0 +1,410 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Abhishek Rathour</title>
+
+    <link rel="shortcut icon" type="image/png" href='#'/>
+    <link rel="shortcut icon" type="image/png" href="/static/main/img/me.png">
+    <!--<link rel="stylesheet" type="text/css" href="/static/main/css/restro.css">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+    font-family: 'EB Garamond', serif;
+    background-color:#03030E;
+    color: white;
+    padding:0 100px 0 100px;
+    box-sizing: border-box;
+}
+h1,h2,h3,h4,h5,h6,p{
+    font-family: 'EB Garamond', serif;
+    color:white;
+}
+.nav{
+    opacity:1;
+    overflow: hidden;
+    position:relative;
+    width:100%;
+    z-index:1;
+    top:0;
+}
+.nav a{
+    text-decoration: none;
+    float: right;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    font-size: 24px;
+}
+.nav a:hover {
+    color: #CB4335;
+}
+.introduction{
+    padding-top: 100px ;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+.explore{
+    margin-top: 100px;
+    background-color:#CB4335;
+    color: white;
+    padding: 25px;
+    width: 100px;
+    box-sizing: border-box;
+    font-size: 26px;
+    text-align: center;
+
+}
+
+.icon{
+    width: 20px;
+    height: 20px;
+    padding-right: 15px;
+    padding-bottom: 30px;
+}
+.intro{
+    font-size: 60px;
+}
+.content{
+    padding: 20px;
+
+}
+.float-about{
+    float: left;
+    width: 50%;
+}
+.float-about-content{
+    float: left;
+    width: 50%;
+}
+.float-about-3{
+    float: left;
+    width: 33%;
+}
+.float-about-4{
+    float: left;
+    width: 25%;
+}
+.contact-topic{
+    color: white;
+
+}
+.contact-data{
+    color:gray;
+
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.hi-there{
+    border: solid white 2px;
+    padding: 16px;
+    margin-top:70px;
+    width:160px;
+    text-align: center;
+    font-size: 30px;
+}
+.container{
+    box-sizing: border-box;
+    padding: 30px;
+}
+.topic{
+    text-align: left;
+    font-size: 26px;
+    color: #CB4335;
+}
+.topic-content{
+    color: gray;
+
+}
+
+.about-content{
+    color: gray;
+}
+.personal{
+    color: #CB4335;
+    font-size: 18px;
+}
+.button{
+    color: white;
+    border: solid white 1px;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    font-size: 16px;
+    text-decoration: none;
+
+
+}
+.img{
+        width: 433px;
+        height: 499px;
+    }
+.progressbarlower{
+	width:100%;
+	height:8px;
+	background-color: white;
+	border-radius:2px;
+}
+.progressbarupper{
+	height:8px;
+	background-color: #CB4335;
+	border-radius:2px;
+}
+.p1{
+	width:10%;
+}
+.p2{
+	width:20%;
+}
+.p3{
+	width:30%;
+}
+.p4{
+	width:40%;
+}
+.p5{
+	width:50%;
+}
+.p6{
+	width:60%;
+}
+.p7{
+	width:70%;
+}
+.p8{
+	width:80%;
+}
+.bgimg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("1.jpg");
+    min-height: 100%;
+    filter: grayscale(30%);
+}
+.textmid{
+    position:relative;
+    z-index: 2;
+    color: white;
+    font-size: 54px;
+}
+.button:hover{
+    background-color: white;
+    color: black;
+}
+
+@media screen and (min-width: 1367px){
+    body{
+        width:2000px;
+    }
+    h1,h2,h3,h4,h5,h6,p,.personal,.about-content,.button{
+    font-size:xx-large;
+    }
+    .img{
+        width: 733px;
+        height: 769px;
+    }
+
+}
+@media screen and (max-width: 1366px){
+}
+
+@media screen and (max-width: 600px){
+    body{
+        padding:0 20px 0 20px;
+    }
+    .nav{
+        display: none;
+    }
+    .float-about,.float-about-content,.float-about-3,.float-about-4{
+        float: none;
+        width: 100%;
+    }
+    .img{
+        width: 340px;
+        height: 400px;
+        box-sizing: border-box;
+    }
+    .container{
+        padding: 10px;
+    }
+    .topic-content{
+        width: 100%;
+    }
+
+
+}
+
+
+</style>
+</head>
+
+<body>
+<div class="nav ">
+        <a href="{% url 'login_user' %}" >LOGIN</a>
+        <a href="#contact" >CONTACT</a>
+        <a href="#my-skills" >MY SKILLS</a>
+        <a href="#aboutme" >ABOUT ME</a>
+        <a href="#services">SERVICES</a>
+        <a href="#" >HOME</a>
+    </div>
+<div class="introduction">
+
+    <span>
+        <a href="https://login.yahoo.com"><img class="icon" src="/static/main/img/yahoo.png"></a>
+        <a href="https://mail.google.com"><img class="icon" src="/static/main/img/gmail.png"></a>
+        <a href="https://www.linkedin.com"><img class="icon" src="/static/main/img/linkedin.png"></a>
+    </span>
+    {% for a in detail %}
+    <div class="textmid">I am {{ a.fname }} </div><br>
+    <div class="intro">
+        <span class="mySlides fade">Coder</span>
+
+        <span class="mySlides fade">Programmer</span>
+
+        <span class="mySlides fade">Web designer</span>
+    </div>
+    <a style="text-decoration: none" href="#services">
+        <div class="explore">&#8595</div></a>
+
+    {% endfor %}
+<br>
+    <br>
+
+</div>
+<br>
+    <br>
+<div class="about-me clearfix" id="services">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">Introduction</p>
+    {% for a in data %}
+    <div class="float-about container">
+
+        <h4 class="topic">{{ a.topic }} </h4>
+        <ul>
+        <li><p class="topic-content">{{ a.point1 }}</p>
+        <li><p class="topic-content">{{ a.point2 }}</p>
+        <p class="topic-content">{{ a.point3 }}</p>
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="about-me clearfix" id="aboutme">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">About Me</p>
+    <div class="float-about">
+        <img class="img" src="/static/main/img/me.png">
+    </div>
+    {% for a in detail %}
+    <div class="float-about ">
+
+        <p class="hi-there">Hi There</p>
+        <div class="about-content">{{ a.about }}    </div>
+        <div class="clearfix">
+        <div class="float-about-content about-content">
+            <p class="personal">Name:</p>
+            <p class="personal-white">{{ a.fname }}</p>
+            <p class="personal">Phone:</p>
+            <p class="personal-white">{{ a.phone }}</p>
+        </div>
+
+        <div class="float-about-content about-content">
+
+            <p class="personal">Email:</p>
+            <p class="personal-white">{{ a.email }}</p>
+            <p class="personal">LinkedIn:</p>
+            <p class="personal-white">{{ a.linkedin }}</p>
+
+
+        </div><hr>
+        </div><br>
+        <a href="{% url 'pdf' %}" class="button" download>Download CV</a>
+
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="about-me clearfix" id="my-skills">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">My Skills</p>
+    <div class="float-about">
+        <p class="about-content container">{% for a in detail %}
+            {{ a.about2 }}
+       {% endfor %}    </p> </div>
+    <div class="float-about container">
+        {% for a in skills %}
+        <p>{{ a.area }}</p>
+
+			<div class="progressbarupper p{{ a.percentage }"></div>
+        {% endfor %}
+
+    </div>
+</div>
+
+<div class="about-me clearfix" id="contact">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">Contact Me</p>
+    {% for a in detail %}
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-pin.png">
+        <p class="contact-topic">Address</p>
+        <p class="contact-data">{{ a.address }}</p>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-phone-02.png">
+        <p class="contact-topic">Phone</p>
+        <p class="contact-data">{{ a.phone }}</p>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-talk-bubble.png">
+        <p class="contact-topic">Chat</p>
+        <p class="contact-data">{{ a.linkedin}}</p>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-envelope.png">
+        <p class="contact-topic">Email</p>
+        <p class="contact-data">{{ a.email }}</p>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+</body>
+</html>

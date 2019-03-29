@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>portfolio</title>
+	<link rel="stylesheet" type="text/css" href="#">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+.floatleft{
+	float: left;
+	width: 48%;
+}
+.floatleftt{
+	float: left;
+	width: 25%;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.field1{
+    padding: 10px;
+    color:gray;
+    width: 200px;
+    height: 30px;
+}
+.field4{
+    padding: 10px;
+    color:gray;
+    width: 740px;
+    height: 50px;
+}
+.field2{
+    color:gray;
+    padding:10px;
+    width: 790px;
+    height: 50px;
+}
+.field3{
+    padding: 10px;
+    color:gray;
+    width: 825px;
+    height: 100px;
+}
+.alert{
+    color: red;width: 100%;
+}
+@media screen and (max-width: 600px){
+    .floatleft,.floatleftt{
+	float: none;
+    }
+    .field1{
+        padding:8px;
+        width: 95%;
+        height: 30px;
+    }
+    .field2{
+        padding:8px;
+        width: 95%;
+        height: 30px;
+    }
+    .field3,.field4{
+        padding:8px;
+        width: 95%;
+        height: 100px;
+    }
+    .alert{
+        color: red;
+        width:500px ;
+    }
+
+}
+    </style>
+</head>
+<body>
+<form action="{% url 'edit'%}" method="post"  >
+    {% csrf_token %}
+<div>
+       {{ personalformset.management_form }}
+        {% for a in personalformset %}
+        {{ a.id }}
+    <div class="clearfix">
+		<div class="floatleftt">
+		</div>
+		<div class="floatleft">
+        About:
+            <p>{{ a.about }}</p><br>
+        About Skills:<p>{{ a.about2 }}</p>
+        </div>
+		</div>
+		<br>
+		<br>
+        <div class="clearfix">
+		<div class="floatleft">
+
+			  <p>Name</p>
+			  <p>{{ a.fname }}</p>
+
+			  <p>D.O.B</p>
+			  <p>{{ a.dob }}</p>
+
+			  <p>Address</p>
+			  <p>{{ a.address }}</p>
+			</div>
+			<div class="floatleft">
+
+
+			  <p>Email</p>
+			  <p>{{ a.email }}</p>
+
+			  <p>Phone</p>
+			  <p>{{ a.phone}}</p>
+
+			  <p>LinkedIn</p>
+			  <p>{{ a.linkedin }}</p>
+
+			</div>
+		</div>
+
+
+        {% endfor %}
+<br><br>
+
+
+        {{ formset.management_form }}
+
+        {% for form in formset %}
+             <div id="form{{ forloop.counter }}">
+     {{ form.id }}{{ forloop.counter }}. Topic:
+            <p>{{ form.topic }}</p>
+
+            <p>{{ form.point1 }}</p>
+              <p>{{ form.point2 }}</p>
+                  <p>{{ form.point3 }}</p>
+                Delete: <a href="javascript:void(0);"  onclick="delf({{ forloop.counter }})">{{ form.DELETE }}</a>
+
+             </div>
+            <br><br>
+        {% endfor %}
+<a href="javascript:void(0);"  onclick="addf()">Add More Filed</a>
+<p class="alert">You can add only two field at each submission.</p>
+
+<br>
+<br>
+ {{ skillsformset.management_form }}
+
+        {% for form in skillsformset %}
+            <div id="skill{{ forloop.counter }}">
+            {{ form.id }}
+              {{ forloop.counter }}.  Skill Name: <p>{{ form.area }}</p>
+                Pecentage:<p>{{ form.percentage }}</p>
+             Delete: <a href="javascript:void(0);"  onclick="dels({{ forloop.counter }})">
+                {{ form.DELETE }}
+            </a>
+            </div>
+            <br>
+            <br>
+        {% endfor %}
+    <a href="javascript:void(0);"  onclick="adds()">Add More Skills</a>
+    <p class="alert">You can add only two field at each submission.</p>
+<br>
+<br>
+
+
+
+    <input type="submit" value="submit"/>
+</form>
+
+<script>
+
+    var k=document.getElementById('id_addfield-TOTAL_FORMS').value;
+    var c=document.getElementById('form'+(k-1));
+    var d=document.getElementById('form'+k);
+    var i=document.getElementById('id_skillsfield-TOTAL_FORMS').value;
+    var a=document.getElementById('skill'+(i-1));
+    var b=document.getElementById('skill'+i);
+
+    a.style.display ='none';
+    b.style.display ='none';
+
+    c.style.display ='none';
+    d.style.display ='none';
+
+    function addf() {
+        var c=document.getElementById('form'+(k-1));
+        c.style.display ='block';
+        k++;
+    }
+    function delf(l) {
+        var d=document.getElementById('form'+l);
+        d.style.display ='none';
+    }
+    function adds() {
+        var a=document.getElementById('skill'+(i-1));
+        a.style.display ='block';
+        i++;
+    }
+    function dels(j) {
+        var b=document.getElementById('skill'+j);
+        b.style.display ='none';
+    }
+</script>
+</body>
+</html>

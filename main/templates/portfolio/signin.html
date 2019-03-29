@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/static/main/css/intern.css">
+    <link href="https://fonts.googleapis.com/css?family=Coiny|Oswald|Pacifico|Thasadith" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<form class="modal-content" role="form" action="{% url 'login_user'%}" method="post" enctype="multipart/form-data" >
+      {% csrf_token %}
+
+<div class="headapp">Admin Login</div><br>
+      <label  for="id_username">Username:</label>
+
+        <input id="id_username" maxlength="30" name="username" type="text"  placeholder="Username">
+
+
+
+
+      <label for="id_password">Password:</label>
+
+        <input   id="id_password" maxlength="30" name="password" type="password"  placeholder="Enter password">
+
+
+        <button  class="button1" type="submit">Log in</button>
+</form>

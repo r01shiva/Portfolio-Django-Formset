@@ -1,0 +1,199 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>portfolio</title>
+
+    <link rel="shortcut icon" type="image/png" href='#'/>
+    <link rel="shortcut icon" type="image/png" href="/static/main/img/me.png">
+    <link rel="stylesheet" type="text/css" href="/static/main/css/restro.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<form action="{% url 'edit'%}" method="post"  >
+    {% csrf_token %}
+<div class="nav ">
+        <a href="{% url 'login_user' %}" >LOGIN</a>
+        <a href="#contact" >CONTACT</a>
+        <a href="#my-skills" >MY SKILLS</a>
+        <a href="#aboutme" >ABOUT ME</a>
+        <a href="#services">SERVICES</a>
+        <a href="#" >HOME</a>
+    </div>
+<div class="introduction">
+
+    <span>
+        <img class="icon" src="/static/main/img/yahoo.png">
+        <img class="icon" src="/static/main/img/gmail.png">
+        <img class="icon" src="/static/main/img/linkedin.png">
+    </span>
+    {% for a in detail %}
+    <div class="textmid">I am {{ a.fname }} </div><br>
+    <div class="intro">
+        <span class="mySlides fade">Coder</span>
+
+        <span class="mySlides fade">Programmer</span>
+
+        <span class="mySlides fade">Web designer</span>
+    </div>
+    <a style="text-decoration: none" href="#services">
+        <div class="explore">&#8595</div></a>
+
+    {% endfor %}
+<br><br>
+
+</div>
+<br><br>
+<div class="about-me clearfix" id="services">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">My Services</p>
+     {{ formset.management_form }}
+        {% for a in formset %}
+            <div id="form{{ forloop.counter }}">
+            {{ a.id }}
+    <div class="float-about container">
+        <h4 class="topic">{{ a.topic }} </h4>
+        <ul>
+            <li><p class="topic-content">{{ a.point1 }}</p>
+            <li><p class="topic-content">{{ a.point2 }}</p>
+            <p class="topic-content">{{ a.point3 }}</p>
+            DELETE: <a href="javascript:void(0);"  onclick="delf({{ forloop.counter }})">{{ a.DELETE }}</a>
+        </ul>
+    </div>
+    </div>
+    {% endfor %}
+<a href="javascript:void(0);"  onclick="addf()">add filed</a>
+</div>
+
+
+<div class="about-me clearfix" id="aboutme">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">About Me</p>
+    <div class="float-about">
+        <img class="img" src="/static/main/img/me.png">
+    </div>
+    {{ personalformset.management_form }}
+        {% for a in personalformset %}
+        {{ a.id }}
+    <div class="float-about ">
+
+        <p class="hi-there">Hi There</p>
+        <div class="about-content">{{ a.about }}    </div>
+        <div class="clearfix">
+        <div class="float-about-content about-content">
+            <p class="personal">Name:</p>
+            <p class="personal-white">{{ a.fname }}</p>
+            <p class="personal">Phone:</p>
+            <p class="personal-white">{{ a.phone }}</p>
+        </div>
+
+        <div class="float-about-content about-content">
+
+            <p class="personal">Email:</p>
+            <p class="personal-white">{{ a.email }}</p>
+            <p class="personal">LinkedIn:</p>
+            <p class="personal-white">{{ a.linkedin }}</p>
+
+
+        </div><hr>
+        </div><br>
+        <a href="#" class="button">Download CV</a>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="about-me clearfix" id="my-skills">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">My Skills</p>
+    <div class="float-about">
+        <div class="about-content container">
+            {{ personalformset.management_form }}
+        {% for a in personalformset %}
+        {{ a.id }}
+            {{ a.about2 }}
+       {% endfor %}    </div> </div>
+
+    <div class="float-about container">
+         {{ skillsformset.management_form }}
+        {% for form in skillsformset %}
+             <div id="skill{{ forloop.counter }}">
+            {{ form.id }}
+        {{ form.area }}
+            {{ form.percentage }}
+             DELETE :<a href="javascript:void(0);"  onclick="dels({{ forloop.counter }})">{{ form.DELETE }}</a>
+         <br>   </div>
+        {% endfor %}
+    <a href="javascript:void(0);"  onclick="adds()">add</a>
+    </div>
+</div>
+
+<div class="about-me clearfix" id="contact">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">Contact Me</p>
+    {{ personalformset.management_form }}
+        {% for a in personalformset %}
+        {{ a.id }}
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-pin.png">
+        <p class="contact-topic">Address</p>
+        <div class="contact-data">{{ a.address }}</div>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-phone-02.png">
+        <p class="contact-topic">Phone</p>
+        <div class="contact-data">{{ a.phone }}</div>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-talk-bubble.png">
+        <p class="contact-topic">Chat</p>
+        <div class="contact-data">{{ a.linkedin}}</div>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-envelope.png">
+        <p class="contact-topic">Email</p>
+        <div class="contact-data">{{ a.email }}</div>
+    </div>
+    {% endfor %}
+
+</div>
+
+<input type="submit" value="submit"/>
+</form>
+
+<script>
+
+    var k=document.getElementById('id_addfield-TOTAL_FORMS').value;
+    var c=document.getElementById('form'+(k-1));
+    var d=document.getElementById('form'+k);
+    var i=document.getElementById('id_skillsfield-TOTAL_FORMS').value;
+    var a=document.getElementById('skill'+(i-1));
+    var b=document.getElementById('skill'+i);
+
+    a.style.display ='none';
+    b.style.display ='none';
+
+    c.style.display ='none';
+    d.style.display ='none';
+
+    function addf() {
+        var c=document.getElementById('form'+(k-1));
+        c.style.display ='block';
+        k++;
+    }
+    function delf(l) {
+        var d=document.getElementById('form'+l);
+        d.style.display ='none';
+    }
+    function adds() {
+        var a=document.getElementById('skill'+(i-1));
+        a.style.display ='block';
+        i++;
+    }
+    function dels(j) {
+        var b=document.getElementById('skill'+j);
+        b.style.display ='none';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,740 @@
+<p id="1" onclick="edit(1);" style="display:block;">ADD</p>
+<div id="inputField1" style="display:none;">
+    <input name="data" type="text" id="fname1" />
+    <button onclick="Save(1);" >Save</button>
+</div>
+
+<div id="7"></div>
+ <button onclick="add();" >add</button>
+
+ <form class="modal-content animate" method="post" >
+            {% csrf_token %}
+           <div class="headapp">Application Form</div><br>
+            <label>First name</label><br>
+            <input id="fname" type="text" name="fname" placeholder="First Name" value="{{ fname }}" required>
+            <br>
+        <label>Last name</label>
+            <br>
+            <input type="text" name="lname" placeholder="Last Name" id="lname"  value="{{ lname }}"><br>
+        <label>phone</label>
+            <br>
+            <input type="text" name="phone" placeholder="phone" id="phone"  value="{{ phone }}" required><br>
+        <label>address</label>
+            <br>
+            <input type="text" name="address" placeholder="address" required id="address"  value="{{ address }}"><br>
+            <label>city</label>
+            <br>
+            <input type="text" name="city" placeholder="city" required id="city"  value="{{ city }}"><br>
+            <label>  pincode </label>
+            <br>
+            <input type="text" id="pcode" name="pcode" placeholder="pcode" value="{{ pcode }}"  required><br>
+            <label>  country </label>
+            <br>
+            <input type="text" id="country" name="country" placeholder="country" value="{{ country }}"  required><br>
+     <button class="button1" type="submit">Submit</button>
+ </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p:hover{
+            border: solid 2px black;
+        }
+    </style>
+</head>
+<body>
+<p id="1" onclick="edit(1);" style="display:block;">ADD</p>
+<div id="inputField1" style="display:none;">
+    <input name="data" type="text" id="fname1" />
+    <button onclick="Save(1);" >Save</button>
+</div>
+
+<div id="7"></div>
+ <button onclick="add();" >add</button>
+
+ <form class="modal-content animate" method="post" >
+            {% csrf_token %}
+           <div class="headapp">Application Form</div><br>
+            <label>First name</label><br>
+            <input id="fname" type="text" name="fname" placeholder="First Name" value="{{ fname }}" required>
+            <br>
+        <label>Last name</label>
+            <br>
+            <input type="text" name="lname" placeholder="Last Name" id="lname"  value="{{ lname }}"><br>
+        <label>phone</label>
+            <br>
+            <input type="text" name="phone" placeholder="phone" id="phone"  value="{{ phone }}" required><br>
+        <label>address</label>
+            <br>
+            <input type="text" name="address" placeholder="address" required id="address"  value="{{ address }}"><br>
+            <label>city</label>
+            <br>
+            <input type="text" name="city" placeholder="city" required id="city"  value="{{ city }}"><br>
+            <label>  pincode </label>
+            <br>
+            <input type="text" id="pcode" name="pcode" placeholder="pcode" value="{{ pcode }}"  required><br>
+            <label>  country </label>
+            <br>
+            <input type="text" id="country" name="country" placeholder="country" value="{{ country }}"  required><br>
+     <button class="button1" type="submit">Submit</button>
+ </form>
+
+ <form  method="post" >
+            {% csrf_token %}
+First name :{{ form.fname }}<br>
+Last name:{{ form.lname }}<br>
+Phone No:{{ form.phone }}<br>
+Address:{{ form.address }}<br>
+City:{{ form.city }}<br>
+Pincode{{ form.pcode }}<br>
+Country{{ form.country }}<br>
+     <button class="button1" type="submit">Edit</button>
+ </form>
+{% for p in object_list %}
+    {{ p.fname }}
+    {{ p.city }}
+    {{ p.id }}
+    {{ p.pk }}
+{% endfor %}
+
+
+
+
+
+
+
+
+
+<script>
+    var i=2;
+    function edit(j) {
+        var a=document.getElementById(j);
+        var b=document.getElementById("inputField"+j);
+       // document.getElementById("fname"+j).value = document.getElementById(j).innerHTML;
+        a.style.display ='none';
+        b.style.display ='block';
+    }
+    function Save(j) {
+        var a=document.getElementById(j);
+        var b=document.getElementById("inputField"+j);
+        var c=document.getElementById("fname"+j).value;
+        b.style.display ='none';
+        a.style.display ='block';
+        a.innerHTML=c;
+
+    }
+    function add() {
+         var a=document.getElementById("7");
+          a.innerHTML+='<p id="'+i+ '"onclick="edit('+i+');" style="display:block;">Add</p>\n' +
+              '<div id="inputField'+i+'" style="display:none;">\n' +
+              '    <input name="data" type="text" id="fname'+i+'"/>\n' +
+              '    <button onclick="Save('+i+');" >Save</button>\n' +
+              '</div>';
+          i++;
+    }
+
+</script>
+</body>
+
+</html>
+
+
+
+
+    def post(self, request):
+        if request.method == 'POST':
+            form = NameF(request.POST)
+            if form.is_valid():
+                form.save()
+                form = NameF()
+                return render(request, 'portfolio/main.html', {'form':form})
+        return render(request, 'portfolio/main.html')
+
+
+
+
+{% for p in form %}
+    {{ p.fname }}
+    {{ p.city }}
+    {{ p.id }}
+    <a href="{% url 'detail' p.id %}">{{ p.fname }}</a>
+{% endfor %}
+
+<p> {{ detail.fname }}</p>
+    <p>{{ detail.lname }}</p>
+   <p> {{ detail.phone }}</p>
+   <p> {{ detail.city }}</p>
+   <p> {{ detail.pcode }}</p>
+   <p> {{ detail.country }}</p>
+<br>
+{% for a in detail.adddata_set.all %}
+    <h3>{{ a.title }}</h3>
+    <p>{{ a.data }}</p>
+{% endfor %}
+
+
+First name :{{ form.fname }}<br>
+Last name:{{ form.lname }}<br>
+Phone No:{{ form.phone }}<br>
+Address:{{ form.address }}<br>
+City:{{ form.city }}<br>
+Pincode{{ form.pcode }}<br>
+Country{{ form.country }}<br>
+
+
+
+<form action="{% url 'edit' %}" method="post"  >
+            {% csrf_token %}
+       {{ formset }}
+    <input type="submit" value="submit"/>
+</form>
+
+
+        <tr><th><label for="id_form-1-title">Title:</label></th><td><textarea name="form-1-title" cols="40" rows="10" maxlength="100" id="id_form-1-title">
+</textarea></td></tr>
+<tr><th><label for="id_form-1-data">Data:</label></th><td><textarea name="form-1-data" cols="40" rows="10" maxlength="2000" id="id_form-1-data">
+</textarea></td></tr>
+<tr><th><label for="id_form-1-DELETE">Delete:</label></th><td><input type="checkbox" name="form-1-DELETE" id="id_form-1-DELETE" /><input type="hidden" name="form-1-id" id="id_form-1-id" /></td></tr>
+
+
+
+
+
+
+
+       {{ personalformset.management_form }}
+
+        {% for formp in personalformset %}
+            {{ formp.id }}{{ formp.image }}
+            {{ formp.fname }}{{ formp.phone }}{{ formp.email }}
+            {{ formp.linkedin }}
+            {{ formp.dob }}
+            {{ formp.about }}
+            {{ formp.address }}
+
+        {% endfor %}
+
+
+
+
+
+def edit(request):
+    detail = Content.objects.all()
+    data = Data.objects.all()
+    skills = Skills.objects.all()
+    Personal = modelformset_factory(Content, fields=('fname', 'phone', 'address', 'email', 'image', 'linkedin', 'about', 'dob'),extra=0)
+    DataFormSet = modelformset_factory(Data, fields=('topic', 'point1','point2','point3'), extra=2, max_num=10, can_delete=True)
+    SkillsFormSet = modelformset_factory(Skills, fields=('area', 'percentage'), extra=2, max_num=10,can_delete=True)
+    if request.method == 'POST':
+        personalformset = Personal(request.POST, prefix='personalfield')
+        formset = DataFormSet(request.POST, prefix='addfield')
+        skillsformset = Personal(request.POST, prefix='skillsfield')
+        if personalformset.is_valid() and formset.is_valid() and skillsformset.is_valid():
+            personalformset.save()
+            formset.save()
+            skillsformset.save()
+        return render(request, 'portfolio/main.html',{'detail': detail, 'data':data, 'skills':skills})
+    else:
+        personalformset = Personal(prefix='personalfield')
+        formset = DataFormSet(prefix='addfield')
+        skillsformset = SkillsFormSet(prefix='skillsfield')
+
+    return render(request, 'portfolio/edit.html',
+                  { 'personalformset': personalformset, 'formset': formset, 'skillsformset':skillsformset, 'detail': detail, 'data':data, 'skills':skills})
+
+
+
+
+
+<br><br>
+     {{ skillsformset.management_form }}
+
+        {% for form in skillsformset %}
+     {{ form }}<br>
+        {% endfor %}
+<br>
+<br>
+
+        {{ formset.management_form }}
+        {% for form in formset %}
+     {{ form }}<br>
+        {% endfor %}
+<br>
+<br>
+
+
+
+
+def edit(request):
+    detail = Content.objects.all()
+    data = Data.objects.all()
+    skills = Skills.objects.all()
+    Personal = modelformset_factory(Content, fields=('fname', 'phone', 'address', 'email', 'image', 'linkedin', 'about', 'dob'),extra=0)
+    if request.method == 'POST':
+        personalformset = Personal(request.POST, prefix='personalfield')
+        if personalformset.is_valid():
+            personalformset.save()
+        return render(request, 'portfolio/main.html',{'detail': detail, 'data':data, 'skills':skills})
+    else:
+        personalformset = Personal(prefix='personalfield')
+
+
+    return render(request, 'portfolio/edit.html',
+                  { 'personalformset': personalformset,'detail': detail, 'data':data, 'skills':skills})
+
+
+
+
+
+
+
+
+
+	<div class="container">
+    {% for a in detail %}
+
+    <div class="clearfix">
+		<div class="floatleftt">
+
+		<img src="{{ a.image.url }}">
+		</div>
+		<div class="floatleft">
+		<h1>{{ a.fname }}</h1>
+            <p>{{ a.about }}</p>
+            <button>Download Resume</button>
+        </div>
+		</div>
+		<br>
+		<br>
+        <div class="clearfix">
+		<div class="floatleft">
+		  <table>
+			<tr>
+			  <td>Name</td>
+			  <td>{{ a.fname }}</td>
+			</tr>
+			<tr>
+			  <td>D.O.B</td>
+			  <td>{{ a.dob }}</td>
+			</tr>
+			<tr>
+			  <td>Address</td>
+			  <td>{{ a.address }}</td>
+			</tr>
+		  </table>
+			</div>
+			<div class="floatleft">
+			<table>
+			<tr>
+			  <td>Email</td>
+			  <td>{{ a.email }}</td>
+			</tr>
+			<tr>
+			  <td>Phone</td>
+			  <td>{{ a.phone}}</td>
+			</tr>
+			<tr>
+			  <td>LinkedIn</td>
+			  <td>{{ a.linkedin }}</td>
+			</tr>
+		  </table>
+
+			</div>
+		</div>
+    {% endfor %}
+        <h2>PROFESSTIONAL SKILLS</h2>
+         {% for a in skills %}
+             <p>{{ a.area }}</p>
+		<div class="progressbarlower">
+			<div class="progressbarupper p{{ a.percentage }}"></div>
+		</div>
+        {% endfor %}
+
+
+
+
+
+
+
+
+ {% for a in data %}
+        <h2>{{ a.topic }}</h2>
+        <p>{{ a.point1 }}</p>
+     <p>{{ a.point2 }}</p>
+     <p>{{ a.point3 }}</p>
+        {% endfor %}
+
+
+
+
+    <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>portfolio</title>
+	<link rel="stylesheet" type="text/css" href="#">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+* {
+  box-sizing: border-box;
+}
+body{
+	margin: 0px;
+	padding: 50px;
+	background-color:#eaeef2;
+}
+.container{
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-top: 40px;
+	padding: 40px;
+	background-color: white;
+}
+img{
+	border-radius: 150px ;
+    width: 200px;
+    height: 200px;
+}
+table {
+  	width: 100%;
+	margin: 10px;
+}
+
+th, td {
+  	text-align:center;
+  	padding: 8px;
+	border:solid 1px thin;
+
+}
+
+tr:nth-child(odd) {
+	background-color:#eaeef2;
+}
+
+.floatleft{
+	float: left;
+	width: 48%;
+}
+.floatleftt{
+	float: left;
+	width: 25%;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.progressbarlower{
+	width:100%;
+	height:10px;
+	background-color:#eaeef2;
+	border-radius: 5px;
+}
+.progressbarupper{
+	height:10px;
+	background-color: aqua;
+	border-radius: 5px;
+}
+button{
+    background-color: ;
+}
+.p1{
+	width:10%;
+}
+.p2{
+	width:20%;
+}
+.p3{
+	width:30%;
+}
+.p4{
+	width:40%;
+}
+.p5{
+	width:50%;
+}
+.p6{
+	width:60%;
+}
+.p7{
+	width:70%;
+}
+.p8{
+	width:80%;
+}
+.field1{
+    font-weight: bold;
+    padding: 10px;
+    color:gray;
+    width: 200px;
+    height: 30px;
+    border-radius:20px 4px 20px 4px;
+}
+.field4{
+    font-weight: bold;
+    padding: 10px;
+    color:gray;
+    width: 740px;
+    height: 50px;
+    border-radius:20px 4px 20px 4px;
+}
+.field2{
+    font-weight: bold;
+    color:gray;
+    padding:10px;
+    width: 790px;
+    height: 50px;
+    border-radius:20px 4px 20px 4px;
+}
+.field3{
+    padding: 10px;
+    color:gray;
+    font-weight: lighter;
+    width: 825px;
+    height: 100px;
+    border-radius:20px 4px 20px 4px;
+}
+    </style>
+</head>
+<body>
+<form action="{% url 'edit'%}" method="post"  >
+    {% csrf_token %}
+<div class="container">
+       {{ personalformset.management_form }}
+        {% for a in personalformset %}
+        {{ a.id }}
+    <div class="clearfix">
+		<div class="floatleftt">
+		{{ a.image }}
+		</div>
+		<div class="floatleft">
+		<h1>{{ a.fname }}</h1>
+            <p>{{ a.about }}</p>
+            <button>Download Resume</button>
+        </div>
+		</div>
+		<br>
+		<br>
+        <div class="clearfix">
+		<div class="floatleft">
+		  <table>
+			<tr>
+			  <td>Name</td>
+			  <td>{{ a.fname }}</td>
+			</tr>
+			<tr>
+			  <td>D.O.B</td>
+			  <td>{{ a.dob }}</td>
+			</tr>
+			<tr>
+			  <td>Address</td>
+			  <td>{{ a.address }}</td>
+			</tr>
+		  </table>
+			</div>
+			<div class="floatleft">
+			<table>
+			<tr>
+			  <td>Email</td>
+			  <td>{{ a.email }}</td>
+			</tr>
+			<tr>
+			  <td>Phone</td>
+			  <td>{{ a.phone}}</td>
+			</tr>
+			<tr>
+			  <td>LinkedIn</td>
+			  <td>{{ a.linkedin }}</td>
+			</tr>
+		  </table>
+
+			</div>
+		</div>
+
+
+        {% endfor %}
+<br><br>
+     {{ skillsformset.management_form }}
+        {% for form in skillsformset %}
+            {{ form.id }}
+           AREA : {{ form.area }}
+           PERCENTAGE+COLOR :{{ form.percentage }}
+     DELETE : {{ form.DELETE }}<br>
+        {% endfor %}
+
+id_skillsfield-0-area
+id_skillsfield-0-percentage
+    <button onclick="add()">Add field</button>
+<br>
+<br>
+
+        {{ formset.management_form }}
+        {% for form in formset %}
+     {{ form.id }}
+            <h3>  TOPIC :  {{ form.topic }}</h3>
+            <ul>
+            <li>{{ form.point1 }}</li>
+                <li>{{ form.point2 }}</li>
+                   <li>  {{ form.point3 }}</li>
+            DELETE:{{ form.DELETE }}
+            </ul>
+        {% endfor %}
+<br>
+<br>
+
+
+    <input type="submit" value="submit"/>
+</form>
+
+
+</body>
+</html>
+
+
+
+    var a=document.getElementById('skill'+'i-1');
+    var b=document.getElementById('skill'+'i-2');
+    a.style.display ='none';
+    b.style.display ='none';
+
+
+
+
+
+
+
+
+<br>
+<br>
+ {{ skillsformset.management_form }}
+
+        {% for form in skillsformset %}
+            <div id="skill{{ forloop.counter }}">
+            {{ form.id }}
+           AREA : {{ form.area }}
+           PERCENTAGE+COLOR :{{ form.percentage }}
+             DELETE :    <a href="javascript:void(0);"  onclick="dels({{ forloop.counter }})">{{ form.DELETE }}</a>
+         <br>   </div>
+
+        {% endfor %}
+
+
+
+    <a href="javascript:void(0);"  onclick="adds()">add</a>
+<br>
+<br>
+
+
+        var i=document.getElementById('id_skillsfield-TOTAL_FORMS').value;
+    var a=document.getElementById('skill'+(i-1));
+    var b=document.getElementById('skill'+i);
+
+        c.style.display ='none';
+    d.style.display ='none';
+
+
+
+    function adds() {
+        var a=document.getElementById('skill'+(i-1));
+        a.style.display ='block';
+        i++;
+    }
+    function dels(j) {
+        var b=document.getElementById('skill'+j);
+        b.style.display ='none';
+    }
+
+
+    <div class="about-me clearfix" id="contact">
+    <p style="text-align: center;font-size: 36px;font-weight: bolder">Contact Me</p>
+    {{ personalformset.management_form }}
+        {% for a in personalformset %}
+        {{ a.id }}
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-pin.png">
+        <p class="contact-topic">Address</p>
+        <div class="contact-data">{{ a.address }}</div>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-phone-02.png">
+        <p class="contact-topic">Phone</p>
+        <div class="contact-data">{{ a.phone }}</div>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-talk-bubble.png">
+        <p class="contact-topic">Chat</p>
+        <div class="contact-data">{{ a.linkedin}}</div>
+    </div>
+    <div class="float-about-4">
+        <img src="/static/main/img/icon-envelope.png">
+        <p class="contact-topic">Email</p>
+        <div class="contact-data">{{ a.email }}</div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+    @login_required(login_url='/login/')
+def edit(request):
+    detail = Content.objects.all()
+    data = Data.objects.all()
+    skills = Skills.objects.all()
+    x = {
+        'fname':TextInput(attrs={'class': 'field1'}),
+        'dob': TextInput(attrs={'class': 'field1'}),
+        'address': TextInput(attrs={'class': 'field1'}),
+        'email': TextInput(attrs={'class': 'field1'}),
+        'phone': TextInput(attrs={'class': 'field1'}),
+        'linkedin': TextInput(attrs={'class': 'field1'}),
+        'about': Textarea(attrs={'class': 'field4'}),
+        'about2': Textarea(attrs={'class': 'field4'}),
+
+    }
+    y = {
+        'topic': TextInput(attrs={'class': 'field2'}),
+        'point1': Textarea(attrs={'class': 'field3'}),
+        'point2': Textarea(attrs={'class': 'field3'}),
+        'point3': Textarea(attrs={'class': 'field3'}),
+    }
+    z = {
+        'area': TextInput(attrs={'class': 'field1'}),
+        'percentage': TextInput(attrs={'class': 'field1'}),
+    }
+    Personal = modelformset_factory(Content, fields=('fname', 'phone', 'address', 'email', 'linkedin', 'about','about2', 'dob'), widgets=x, extra=0)
+    DataFormSet = modelformset_factory(Data, fields=('topic', 'point1','point2','point3'), widgets=y,extra=2, max_num=10, can_delete=True)
+    SkillsFormSet = modelformset_factory(Skills, fields=('area', 'percentage'), widgets=z,extra=2, max_num=10,can_delete=True)
+    if request.method == 'POST':
+        personalformset = Personal(request.POST, request.FILES, prefix='personalfield')
+        formset = DataFormSet(request.POST, request.FILES, prefix='addfield')
+        skillsformset = SkillsFormSet(request.POST, request.FILES, prefix='skillsfield')
+        if personalformset.is_valid() and formset.is_valid() and skillsformset.is_valid():
+            personalformset.save()
+            formset.save()
+            skillsformset.save()
+        return render(request, 'portfolio/afterlogin.html',{'detail': detail, 'data':data, 'skills':skills})
+    else:
+        personalformset = Personal(prefix='personalfield')
+        formset = DataFormSet(prefix='addfield')
+        skillsformset = SkillsFormSet(prefix='skillsfield')
+
+    return render(request, 'portfolio/edit.html',
+                  {'personalformset': personalformset, 'formset': formset, 'skillsformset':skillsformset, 'detail': detail, 'data':data, 'skills':skills})
+

@@ -1,0 +1,14 @@
+<form method="post" action="{% url 'submit' %}">
+        {% csrf_token %}
+          <fieldset>
+          <legend>Contact Details</legend>
+          <div>
+            {{ contact_form.management_form }}
+            {% for contact in contact_form %}
+             <div class="link-formset">
+              {{ contact.as_p }}
+            </div>
+            {% endfor %}
+          </div>
+        </fieldset>
+</form>
