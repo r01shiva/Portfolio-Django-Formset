@@ -4,6 +4,7 @@
 About:
 -        It is full working website on Personal Portfolio 
 -        You Can Edit the portfolio
+-        Fromset concept is used / Modelformset refer views.py
 -        Create your resume Dynamically
 -        Edit Dynamically 
 -        Download pdf of resume
