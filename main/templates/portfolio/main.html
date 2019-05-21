@@ -76,8 +76,8 @@ h1,h2,h3,h4,h5,h6,p{
 }
 
 .icon{
-    width: 20px;
-    height: 20px;
+    width: 49px;
+    height: 49px;
     padding-right: 15px;
     padding-bottom: 30px;
 }
@@ -224,14 +224,25 @@ h1,h2,h3,h4,h5,h6,p{
         width: 733px;
         height: 769px;
     }
+    .log{
+        display:none;
+    }
 
 }
 @media screen and (max-width: 1366px){
+    .log{
+        display:none;
+    }
 }
 
 @media screen and (max-width: 600px){
     body{
         padding:0 20px 0 20px;
+    }
+    .icon{
+        width: 48px;
+        height: 48px;
+        margin: -4px 4px 4px 4px;
     }
     .nav{
         display: none;
@@ -250,6 +261,20 @@ h1,h2,h3,h4,h5,h6,p{
     }
     .topic-content{
         width: 100%;
+    }
+    .explore{
+        display:none;
+    }
+    .log{
+        display:block;
+        text-decoration: none;
+        color: white;
+        padding: 8px 15px;
+        text-align: center;
+        font-size: 24px;
+    }
+    .log:hover {
+        color: #CB4335;
     }
 
 
@@ -354,7 +379,7 @@ h1,h2,h3,h4,h5,h6,p{
         {% for a in skills %}
         <p>{{ a.area }}</p>
 
-			<div class="progressbarupper p{{ a.percentage }"></div>
+			<div class="progressbarupper p{{ a.percentage }}"></div>
         {% endfor %}
 
     </div>
@@ -385,6 +410,10 @@ h1,h2,h3,h4,h5,h6,p{
     </div>
     {% endfor %}
 
+</div>
+
+<div class="log">
+<a href="{% url 'login_user' %}" >LOGIN</a>
 </div>
 
 
