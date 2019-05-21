@@ -1,5 +1,6 @@
 #Django based full stack developed Website
 
+read check.md
 
 About:
 -        It is full working website on Personal Portfolio 
