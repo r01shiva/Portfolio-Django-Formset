@@ -2,12 +2,12 @@
 
 
 About:
-        It is full working website on Personal Portfolio 
-        You Can Edit the portfolio
-        Create your resume Dynamically
-        Edit Dynamically 
-        Download pdf of resume
-        Predifined Layout
+-        It is full working website on Personal Portfolio 
+-        You Can Edit the portfolio
+-        Create your resume Dynamically
+-        Edit Dynamically 
+-        Download pdf of resume
+-        Predifined Layout
      
 Requirement:
 
